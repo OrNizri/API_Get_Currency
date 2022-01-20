@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -21,8 +21,6 @@ namespace WebAPiCurrencies.Controllers
     public class GetCurrencyPairsControllers : ControllerBase
     {
         private readonly IConfiguration _configuration;
-        private static string connection = "Data Source=DESKTOP-7PJF1K5;Initial Catalog=Currencies;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-
         public GetCurrencyPairsControllers(IConfiguration configuration)
         {
             _configuration = configuration;
@@ -33,7 +31,7 @@ namespace WebAPiCurrencies.Controllers
         {
             DataTable dt = null;
 
-            using (var conn = new SqlConnection(connection))
+            using (var conn = new SqlConnection(ConfigSettings.connection))
             {
                 conn.Open();
                 using (SqlCommand cmd = new SqlCommand("Proc_Get_Currency_Pairs", conn))
